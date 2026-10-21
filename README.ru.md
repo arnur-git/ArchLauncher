@@ -43,5 +43,4 @@ ArchLauncher не содержит Minecraft. Используй легальн�
 
 ## Авторы
 
-- Arnur Daulbaev ([`@arnur-git`](https://github.com/arnur-git)) — автор проекта и сопровождающий
-- OpenAI Codex — помощь ИИ при разработке и соавторство
+- [Arnur](https://github.com/arnur-git) и Codex — авторы

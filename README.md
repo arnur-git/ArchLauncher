@@ -43,5 +43,4 @@ ArchLauncher does not include Minecraft. You must provide a legally obtained gam
 
 ## Authors
 
-- Arnur Daulbaev ([`@arnur-git`](https://github.com/arnur-git)) — project author and maintainer
-- OpenAI Codex — AI development assistance and co-author credit
+- [Arnur](https://github.com/arnur-git) and Codex — authors

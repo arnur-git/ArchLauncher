@@ -1,7 +1,7 @@
 {
   "name": "archlauncher",
   "version": "1.1.0",
-  "author": "Arnur Daulbaev (@arnur-git) and OpenAI Codex",
+  "author": "Arnur and Codex",
   "description": "Modern Minecraft Java launcher",
   "main": "src/main.js",
   "scripts": {
