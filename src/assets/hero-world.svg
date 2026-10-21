@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560" fill="none">
+ <defs>
+  <linearGradient id="sky" x1="470" y1="32" x2="650" y2="520" gradientUnits="userSpaceOnUse"><stop stop-color="#273B38"/><stop offset=".5" stop-color="#253334"/><stop offset="1" stop-color="#171C22"/></linearGradient>
+  <linearGradient id="glow" x1="507" y1="64" x2="772" y2="347" gradientUnits="userSpaceOnUse"><stop stop-color="#C8FF91" stop-opacity=".3"/><stop offset="1" stop-color="#C8FF91" stop-opacity="0"/></linearGradient>
+  <linearGradient id="grass" x1="485" y1="277" x2="501" y2="393" gradientUnits="userSpaceOnUse"><stop stop-color="#A9D978"/><stop offset="1" stop-color="#5F8A54"/></linearGradient>
+  <linearGradient id="soil" x1="449" y1="337" x2="470" y2="505" gradientUnits="userSpaceOnUse"><stop stop-color="#76543F"/><stop offset="1" stop-color="#342D2B"/></linearGradient>
+  <filter id="blur" x="303" y="40" width="588" height="530" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feGaussianBlur stdDeviation="38"/></filter>
+ </defs>
+ <ellipse cx="595" cy="296" rx="253" ry="206" fill="url(#glow)" filter="url(#blur)"/>
+ <circle cx="676" cy="156" r="45" fill="#D7FF9A" fill-opacity=".93"/>
+ <circle cx="676" cy="156" r="72" fill="#D7FF9A" fill-opacity=".1"/>
+ <g fill="#D9E8B8" fill-opacity=".72">
+  <path d="M132 124h8v8h-8zM203 77h5v5h-5zM279 162h7v7h-7zM384 86h5v5h-5zM796 93h8v8h-8zM846 229h5v5h-5zM736 313h6v6h-6zM104 283h6v6h-6zM304 298h4v4h-4z"/>
+ </g>
+ <path d="m190 366 104-69 106 17 61-58 111 15 71-42 112 42 52 53-98 40-92-17-79 47-109-21-72 34-102-11-65 20V366Z" fill="#32413C"/>
+ <path d="m563 280 66-42 72 17 42 40-61 26-68-15-51 13v-39Z" fill="#52614B"/>
+ <path d="m724 323 51-27 54 20 46 8-98 40-92-17 39-24Z" fill="#414F46"/>
+ <path d="m249 339 91-44 69 16-48 34-74 21-38-27Z" fill="#46574A"/>
+ <path d="m198 364 70-34 75 12 62-22 74 14 73-38 88 12 70-37 93 30-5 45-84 32-66-15-82 42-109-18-66 34-84-13-71 24-67-17-71 12V364Z" fill="#252E2D"/>
+ <path d="M292 282h267l121 52-4 77-91 24-94-24-69 28-94-30-61-44 25-83Z" fill="url(#soil)"/>
+ <path d="m292 282 127-78h140l76 45 45 52-40 39-78-18-49 30-73-31-67 26-56-27-50 9-20-47Z" fill="url(#grass)"/>
+ <path d="m419 204 140 1 76 44-99 11-102-56 17-1Z" fill="#C7ED94" fill-opacity=".63"/>
+ <path d="m292 282 93-53 34-25 107 58 93-13 40 54-40 39-78-18-49 30-73-31-67 26-56-27-50 9-20-47Z" fill="#6D9E61" fill-opacity=".55"/>
+ <g fill="#B0D87E">
+  <path d="m319 262 40-24 22 15-36 25-26-16Z"/><path d="m387 226 24-16 23 12-24 17-23-13Z"/><path d="m493 229 25-15 27 17-27 15-25-17Z"/><path d="m578 248 27 16 35-4 11 18-43 6-40-21 10-15Z"/>
+ </g>
+ <g fill="#594338"><path d="m321 328 56 14v43l-56-20v-37Z"/><path d="m455 326 47 17v41l-47-18v-40Z"/><path d="m573 328 50 2v48l-50 15v-65Z"/><path d="m383 378 44 17v43l-44-16v-44Z"/><path d="m509 384 44-18v39l-44 18v-39Z"/><path d="m626 377 40-12v35l-40 11v-34Z"/></g>
+ <g fill="#6E5040"><path d="m321 365 56 20v18l-56-20v-18Z"/><path d="m455 366 47 18v18l-47-18v-18Z"/><path d="m573 376 50-16v18l-50 15v-17Z"/><path d="m383 420 44 17v18l-44-17v-18Z"/><path d="m509 423 44-18v18l-44 18v-18Z"/><path d="m626 411 40-11v18l-40 11v-18Z"/></g>
+ <g fill="#D7FF9B"><path d="M254 184h5v18h-5zM247 191h19v5h-19z"/><path d="M771 380h4v14h-4zM766 385h14v4h-14z"/><path d="M165 335h4v14h-4zM160 340h14v4h-14z"/></g>
+ <ellipse cx="477" cy="468" rx="244" ry="28" fill="#09100D" fill-opacity=".38"/>
+</svg>

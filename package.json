@@ -1,0 +1,39 @@
+{
+  "name": "archlauncher",
+  "version": "1.1.0",
+  "author": "Arnur Daulbaev (@arnur-git) and OpenAI Codex",
+  "description": "Modern Minecraft Java launcher",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "dependencies": {
+    "minecraft-launcher-core": "^3.18.2",
+    "msmc": "^5.0.5"
+  },
+  "devDependencies": {
+    "electron": "^35.1.5",
+    "electron-builder": "^26.0.12"
+  },
+  "build": {
+    "appId": "ru.archlauncher.app",
+    "productName": "ArchLauncher",
+    "files": [
+      "src/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": "nsis"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
+  },
+  "allowScripts": {
+    "electron": true
+  }
+}

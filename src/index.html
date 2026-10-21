@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#101412">
+  <title>ArchLauncher</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="shell">
+    <aside class="rail">
+      <div class="brand-lockup"><img class="brand-mark" src="assets/arch-mark.svg" alt=""><span>ARCH<span class="brand-light">LAUNCHER</span></span></div>
+      <div class="rail-caption">ПРОСТРАНСТВО</div>
+      <nav class="rail-nav">
+        <button class="nav active" data-page="home" title="Главная"><span class="nav-icon">⌂</span><span>Главная</span><i></i></button>
+        <button class="nav" data-page="instances" title="Сборки"><span class="nav-icon">▦</span><span>Сборки</span><i></i></button>
+        <button class="nav" data-page="settings" title="Настройки"><span class="nav-icon">⚙</span><span>Настройки</span><i></i></button>
+      </nav>
+      <div class="rail-bottom">
+        <div class="rail-tip"><span class="tip-icon">✦</span><div><b>Твой мир</b><small>начинается здесь</small></div></div>
+        <div class="launcher-status"><span class="status-dot"></span><span>Лаунчер готов</span><span class="status-version">1.1.0</span></div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="crumb"><span class="muted">ARCH</span><span class="slash">/</span><span id="crumb-title">Главная</span></div>
+        <div class="top-actions"><button class="icon-button" id="folder-btn" title="Открыть папку">↗</button><button class="account-pill" id="account-open"><span class="avatar" id="avatar">?</span><span class="account-copy"><small>ПРОФИЛЬ</small><b id="account-name">Без аккаунта</b></span><span class="chevron">⌄</span></button></div>
+      </header>
+
+      <section class="page active" id="page-home">
+        <div class="hero">
+          <div class="hero-copy-block">
+            <div class="eyebrow"><span class="live-dot"></span> ТВОЯ ИГРА. ТВОИ ПРАВИЛА.</div>
+            <h1>Создавай<br><em>свой мир.</em></h1>
+            <p class="hero-copy">Все твои сборки Minecraft — в одном месте.<br>Настрой, запускай и возвращайся к игре.</p>
+            <div class="hero-buttons"><button class="button primary play-main" id="play-btn"><span class="play-icon">▶</span><span id="play-label">Играть</span></button><button class="button ghost" id="instances-jump">Моя библиотека <span>↗</span></button></div>
+            <div class="hero-meta"><span class="version-chip"><i></i><span id="selected-version">Выбери сборку</span></span><span class="meta-divider"></span><span class="system-info" id="runtime-info">Java не установлена</span></div>
+          </div>
+          <div class="hero-visual"><img class="hero-world" src="assets/hero-world.svg" alt="Воксельный остров в сумерках"><div class="art-label"><span class="art-label-dot"></span> ГРАНИЦА НОВОГО МИРА</div></div>
+          <div class="hero-index">01 <span>/</span> 03</div>
+        </div>
+
+        <div class="section-head"><div><div class="eyebrow muted">ТВОЯ КОЛЛЕКЦИЯ</div><h2>Продолжить игру</h2></div><button class="text-button" id="all-instances">Все сборки <span>→</span></button></div>
+        <div id="home-instances" class="instance-grid"></div>
+        <div class="home-bottom"><div class="mini-card"><span class="mini-icon purple">✦</span><div><b>Свобода выбора</b><small>Vanilla, Forge, NeoForge, Fabric и Quilt</small></div><span class="card-arrow">↗</span></div><div class="mini-card"><span class="mini-icon green">⌘</span><div><b>Всё под контролем</b><small>Java, память и игровые файлы</small></div><span class="card-arrow">↗</span></div><div class="mini-card news-card"><div class="news-label">ARCH NOTES <span>01</span></div><div class="news-title">Твой следующий мир<br>уже ждёт.</div><span class="news-glow"></span></div></div>
+      </section>
+
+      <section class="page" id="page-instances">
+        <div class="page-title-row"><div><div class="eyebrow muted">МОЯ БИБЛИОТЕКА</div><h1 class="page-title">Сборки<span class="title-count" id="instance-count">0</span></h1><p class="page-subtitle">Отдельные миры, версии и модлоадеры — всё собрано здесь.</p></div><button class="button primary" id="new-instance"><span>＋</span> Новая сборка</button></div>
+        <div class="filter-row"><button class="filter active" data-filter="Все">Все</button><button class="filter" data-filter="Vanilla">Vanilla</button><button class="filter" data-filter="Forge">Forge</button><button class="filter" data-filter="NeoForge">NeoForge</button><button class="filter" data-filter="Fabric">Fabric</button><button class="filter" data-filter="Quilt">Quilt</button><span class="filter-count" id="filter-count"></span></div>
+        <div id="instance-list" class="instance-list"></div>
+        <div id="empty-state" class="empty-state"><img src="assets/world-tile.svg" alt=""><h3>Тут начинается приключение</h3><p>Создай первую сборку и выбери свой Minecraft.</p><button class="button secondary" id="empty-new">＋ Создать сборку</button></div>
+      </section>
+
+      <section class="page" id="page-settings">
+        <div class="eyebrow muted">ПЕРСОНАЛИЗАЦИЯ</div><h1 class="page-title">Настройки</h1><p class="page-subtitle">Подстрой ArchLauncher под себя.</p>
+        <div class="settings-layout">
+          <div class="settings-nav" role="tablist" aria-label="Разделы настроек">
+            <button class="settings-link active" type="button" role="tab" aria-selected="true" data-settings-tab="game">Игра</button>
+            <button class="settings-link" type="button" role="tab" aria-selected="false" data-settings-tab="accounts">Аккаунты</button>
+            <button class="settings-link" type="button" role="tab" aria-selected="false" data-settings-tab="about">О лаунчере</button>
+          </div>
+          <div class="settings-content">
+            <div class="settings-panel active" role="tabpanel" data-settings-panel="game">
+              <div class="settings-card"><div class="card-heading"><span class="setting-symbol">⌘</span><div><h3>Параметры Java</h3><p>Память и среда выполнения Minecraft.</p></div></div><label class="field-label">Оперативная память <span id="ram-label">3 ГБ</span></label><input type="range" id="ram-slider" min="2" max="4" value="3"><div class="range-labels"><span>2 ГБ</span><span>4 ГБ</span></div><div class="java-row"><div><b>Java Runtime</b><small id="java-path-label">Не установлена</small></div><button class="button secondary small" id="install-java">↓ Установить Java 25</button></div></div>
+            </div>
+            <div class="settings-panel" role="tabpanel" data-settings-panel="accounts" hidden>
+              <div class="settings-card"><div class="card-heading"><span class="setting-symbol violet">◉</span><div><h3>Учётная запись</h3><p>Активный профиль и подключение аккаунтов.</p></div></div><div id="saved-accounts" class="saved-accounts"></div><button class="login-option" id="ms-login"><span class="provider-icon ms">▦</span><span><b>Microsoft</b><small>Для лицензии Minecraft Java Edition</small></span><span class="arrow">→</span></button><button class="login-option" id="ely-login"><span class="provider-icon ely">E</span><span><b>Ely.by</b><small>Логин, пароль и код 2FA</small></span><span class="arrow">→</span></button><button class="login-option" id="offline-login"><span class="provider-icon offline">◌</span><span><b>Офлайн</b><small>Одиночная игра без сетевой авторизации</small></span><span class="arrow">→</span></button></div>
+            </div>
+            <div class="settings-panel" role="tabpanel" data-settings-panel="about" hidden>
+              <div class="settings-card about-card"><div class="about-brand"><img src="assets/arch-mark.svg" alt=""><div><h3>ArchLauncher</h3><p>Лаунчер Minecraft Java Edition</p></div><span class="about-version">1.1.0</span></div><div class="about-divider"></div><div class="about-facts"><div><span>ВЕРСИЯ ПРИЛОЖЕНИЯ</span><b>1.1.0</b></div><div><span>ДАННЫЕ И СБОРКИ</span><b id="data-dir">Файлы игры и сборок хранятся локально.</b></div></div><button class="text-button" id="open-data">Открыть папку данных →</button></div>
+              <div class="settings-card about-note"><span class="setting-symbol green">✓</span><div><h3>Твоя библиотека на этом устройстве</h3><p>Сборки, настройки и игровые файлы хранятся локально в папке ArchLauncher.</p></div></div>
+            </div>
+          </div>
+        </div>      </section>
+    </main>
+  </div>
+  <div class="modal-backdrop" id="modal"><div class="modal"><button class="modal-close" id="modal-close">×</button><div id="modal-content"></div></div></div><div class="toast" id="toast"></div><div class="game-console" id="console"><div class="console-head"><span><i class="live-dot"></i> <span id="console-status">Подготовка игры…</span></span><button id="console-close">×</button></div><div id="console-log"></div></div>
+  <script src="renderer.js"></script>
+</body>
+</html>
