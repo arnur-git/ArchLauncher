@@ -41,6 +41,10 @@ npm run dist
 
 ArchLauncher не содержит Minecraft. Используй легально полученную копию игры и соблюдай условия Minecraft и выбранных модлоадеров.
 
+## Устранение сбоев
+
+Если Windows сообщает `0xC0000005`, а лог указывает на Intel Iris Xe/OpenGL, обнови видеодрайвер со [страницы загрузки Intel](https://www.intel.com/content/www/us/en/download/726609/intel-arc-iris-xe-graphics-whql-windows.html), перезагрузи Windows и попробуй снова. Лаунчер покажет эту подсказку при обнаружении такого кода завершения.
+
 ## Авторы
 
 - [Arnur](https://github.com/arnur-git) и Codex — авторы

@@ -41,6 +41,10 @@ The launcher does not save the Ely.by password. Authentication tokens are stored
 
 ArchLauncher does not include Minecraft. You must provide a legally obtained game account and follow the terms of Minecraft and the selected mod loaders.
 
+## Troubleshooting
+
+If Windows reports `0xC0000005` and the game log shows Intel Iris Xe/OpenGL, update the Intel graphics driver from [Intel's official download page](https://www.intel.com/content/www/us/en/download/726609/intel-arc-iris-xe-graphics-whql-windows.html), restart Windows, and try again. The launcher shows this guidance when it detects that exit code.
+
 ## Authors
 
 - [Arnur](https://github.com/arnur-git) and Codex — authors

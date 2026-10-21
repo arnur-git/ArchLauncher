@@ -99,7 +99,17 @@ window.arch.on('download-progress', data => {
   const size = value => value > 1024 * 1024 ? `${(value / 1024 / 1024).toFixed(1)} МБ` : `${Math.round((value || 0) / 1024)} КБ`;
   $('#console-status').textContent = `Скачивается ${data.name || 'файл'} · ${size(data.current)}${data.total ? ` / ${size(data.total)}` : ''}`;
 });
-window.arch.on('game-exit', data => { const crashed = Number(data.code) === 3221225477; $('#console-status').textContent = crashed ? 'Системный сбой процесса (0xC0000005)' : `Игра завершилась · код ${data.code}`; toast(crashed ? 'Minecraft аварийно завершился. В логе последним запущен OpenGL на Intel Iris Xe; проверь обновление видеодрайвера.' : `Игра закрылась · код ${data.code}`); });
+window.arch.on('game-exit', data => {
+  const intelAccessViolation = Number(data.code) === 3221225477;
+  const help = $('#graphics-crash-help');
+  help.hidden = !intelAccessViolation;
+  $('#console-status').textContent = intelAccessViolation ? 'Сбой видеодрайвера (0xC0000005)' : `Игра завершилась · код ${data.code}`;
+  if (intelAccessViolation) {
+    help.querySelector('p').textContent = 'В логе: Minecraft 26.3, OpenGL на Intel Iris Xe и драйвер 31.0.101.4032. Обнови графический драйвер Intel и перезагрузи компьютер, затем попробуй снова.';
+    toast('Похоже на сбой графического драйвера. Подробности и ссылка показаны в консоли.');
+  } else toast(`Игра закрылась · код ${data.code}`);
+});
+$('#update-graphics-driver').onclick = () => window.arch.openExternal('https://www.intel.com/content/www/us/en/download/726609/intel-arc-iris-xe-graphics-whql-windows.html');
 window.arch.on('install-progress', data => { if (data.stage === 'java') { $('#install-java').textContent = `${data.text} ${data.percent}%`; if ($('#console').classList.contains('show')) $('#console-status').textContent = `${data.text} ${data.percent}%`; } else if ($('#console').classList.contains('show')) $('#console-status').textContent = data.text; });
 window.arch.on('auth-status', data => toast(data.text));
 window.arch.state().then(value => { state = value; render(); });
