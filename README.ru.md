@@ -4,6 +4,8 @@
 
 Лаунчер Minecraft: Java Edition для Windows на Electron и Node.js.
 
+Сайт проекта: [ArchLauncher](https://arnur-git.github.io/ArchLauncher/).
+
 ## Скачать
 
 Последний установщик Windows находится на странице [GitHub Releases](https://github.com/arnur-git/ArchLauncher/releases/latest).

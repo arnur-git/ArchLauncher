@@ -4,6 +4,8 @@
 
 A Minecraft: Java Edition launcher for Windows, built with Electron and Node.js.
 
+Project website: [archlauncher](https://arnur-git.github.io/ArchLauncher/).
+
 ## Download
 
 Download the latest Windows installer from [GitHub Releases](https://github.com/arnur-git/ArchLauncher/releases/latest).

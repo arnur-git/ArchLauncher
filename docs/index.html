@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10140f">
+  <meta name="description" content="ArchLauncher — лаунчер Minecraft Java Edition для Windows. Сборки Vanilla, Forge, NeoForge, Fabric и Quilt, установка Java и моды.">
+  <title>ArchLauncher — Minecraft Java Launcher</title>
+  <link rel="icon" href="../src/assets/arch-mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar wrap">
+    <a class="brand" href="#top" aria-label="ArchLauncher home">
+      <img src="../src/assets/arch-mark.svg" alt="" width="38" height="38">
+      <span>ARCH<span class="brand-light">LAUNCHER</span></span>
+    </a>
+    <nav class="nav-links" aria-label="Навигация">
+      <a href="#features" data-i18n="navFeatures">Возможности</a>
+      <a href="#about" data-i18n="navAbout">О лаунчере</a>
+      <a href="https://github.com/arnur-git/ArchLauncher" target="_blank" rel="noreferrer" data-i18n="navSource">Исходный код</a>
+    </nav>
+    <button class="language" id="language-toggle" type="button" aria-label="Switch language">EN</button>
+  </header>
+
+  <main id="top">
+    <section class="hero wrap">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="pulse"></span><span data-i18n="eyebrow">ЛАУНЧЕР ДЛЯ MINECRAFT JAVA</span></div>
+        <h1 data-i18n="headline">Твоя следующая<br><em>история начинается здесь.</em></h1>
+        <p class="hero-text" data-i18n="heroText">Удобное место для любимых сборок Minecraft: Java Edition. Выбирай версию, загружай моды и запускай игру.</p>
+        <div class="hero-actions">
+          <a class="button primary" id="download-link" href="https://github.com/arnur-git/ArchLauncher/releases/latest" target="_blank" rel="noreferrer"><span class="download-icon">↓</span><span data-i18n="download">Скачать для Windows</span><span class="button-arrow">↗</span></a>
+          <a class="button ghost" href="https://github.com/arnur-git/ArchLauncher" target="_blank" rel="noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .9a11.1 11.1 0 0 0-3.51 21.63c.56.1.76-.24.76-.54v-2.07c-3.1.67-3.76-1.32-3.76-1.32-.5-1.3-1.24-1.65-1.24-1.65-1.02-.7.08-.69.08-.69 1.12.08 1.71 1.15 1.71 1.15 1 .1.77 2.03 3.26 1.44.1-.73.39-1.23.7-1.52-2.47-.28-5.07-1.24-5.07-5.5 0-1.22.44-2.21 1.15-2.99-.12-.28-.5-1.42.11-2.95 0 0 .94-.3 3.05 1.14a10.6 10.6 0 0 1 5.55 0c2.11-1.44 3.04-1.14 3.04-1.14.61 1.53.23 2.67.12 2.95.71.78 1.14 1.77 1.14 2.99 0 4.27-2.6 5.21-5.08 5.49.4.35.75 1.01.75 2.04v3.03c0 .3.2.65.77.54A11.1 11.1 0 0 0 12 .9Z"/></svg><span data-i18n="source">Исходный код</span></a>
+        </div>
+        <div class="hero-meta"><span class="windows-mark">▦</span><span data-i18n="winNote">Windows 10/11</span><span class="meta-dot">·</span><span id="release-version">Последний релиз</span></div>
+      </div>
+      <div class="hero-art" aria-label="Предпросмотр ArchLauncher">
+        <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+        <div class="spark spark-a">✦</div><div class="spark spark-b">✧</div><div class="spark spark-c">✦</div>
+        <div class="planet"><div class="planet-shine"></div><div class="planet-ridge"></div><div class="planet-crater crater-a"></div><div class="planet-crater crater-b"></div><div class="planet-crater crater-c"></div></div>
+        <div class="float-card card-version"><span class="mini-icon">◈</span><span><b>Minecraft</b><small id="preview-version">Java Edition</small></span><span class="online-dot"></span></div>
+        <div class="float-card card-loader"><span class="loader-mark">F</span><span><b>Modded world</b><small>Fabric · Ready to play</small></span><span class="check">✓</span></div>
+        <div class="hero-glow"></div>
+      </div>
+      <div class="hero-bottom"><span>01 / BUILT FOR YOUR WORLDS</span><span>SCROLL TO EXPLORE&nbsp; ↓</span></div>
+    </section>
+
+    <section class="ticker" aria-label="Supported loaders"><div class="ticker-track"><span>VANILLA</span><i>✳</i><span>FORGE</span><i>✳</i><span>NEOFORGE</span><i>✳</i><span>FABRIC</span><i>✳</i><span>QUILT</span><i>✳</i><span>MODRINTH</span><i>✳</i><span>CURSEFORGE</span><i>✳</i><span>VANILLA</span><i>✳</i><span>FORGE</span><i>✳</i><span>NEOFORGE</span><i>✳</i><span>FABRIC</span><i>✳</i><span>QUILT</span><i>✳</i><span>MODRINTH</span><i>✳</i><span>CURSEFORGE</span></div></section>
+
+    <section class="features wrap section" id="features">
+      <div class="section-kicker"><span>02</span><span data-i18n="featuresKicker">ВСЁ НУЖНОЕ — В ОДНОМ МЕСТЕ</span></div>
+      <div class="section-heading"><h2 data-i18n="featuresTitle">Меньше настроек.<br><em>Больше приключений.</em></h2><p data-i18n="featuresLead">Сборки, вход и установка Java собраны в понятном лаунчере для Windows.</p></div>
+      <div class="feature-grid">
+        <article class="feature-card feature-auth"><div class="card-top"><span class="feature-number">01</span><span class="feature-glyph">◉</span></div><h3 data-i18n="authTitle">Твой способ входа</h3><p data-i18n="authText">Microsoft, Ely.by или локальный офлайн-профиль для одиночной игры.</p><div class="auth-tags"><span>MICROSOFT</span><span>ELY.BY</span><span>OFFLINE</span></div></article>
+        <article class="feature-card feature-versions"><div class="card-top"><span class="feature-number">02</span><span class="feature-glyph">⌘</span></div><h3 data-i18n="versionsTitle">Сборки без путаницы</h3><p data-i18n="versionsText">Отдельные игровые папки для Vanilla, Forge, NeoForge, Fabric и Quilt.</p><div class="loader-pills"><b>F</b><b>N</b><b>Fa</b><b>Q</b><span>+ VANILLA</span></div></article>
+        <article class="feature-card feature-mods"><div class="card-top"><span class="feature-number">03</span><span class="feature-glyph">✳</span></div><h3 data-i18n="modsTitle">Моды рядом</h3><p data-i18n="modsText">Ищи совместимые дополнения в Modrinth и CurseForge прямо в лаунчере.</p><div class="mod-sources"><span class="modrinth-mark">▧</span> Modrinth <span class="source-divider">/</span> CurseForge</div></article>
+        <article class="feature-card feature-java"><div class="card-top"><span class="feature-number">04</span><span class="feature-glyph">↓</span></div><h3 data-i18n="javaTitle">Java устанавливается сама</h3><p data-i18n="javaText">Лаунчер подберёт подходящую Java для выбранной версии игры.</p><div class="java-status"><span class="online-dot"></span><span data-i18n="javaReady">JAVA RUNTIME · READY WHEN NEEDED</span></div></article>
+      </div>
+    </section>
+
+    <section class="about section" id="about"><div class="about-inner wrap"><div class="section-kicker light"><span>03</span><span data-i18n="aboutKicker">ПРОСТО И ОТКРЫТО</span></div><div class="about-layout"><div><h2 data-i18n="aboutTitle">Твой лаунчер.<br><em>Твои правила.</em></h2><p data-i18n="aboutText">ArchLauncher создан для удобного запуска Minecraft Java Edition и управления сборками. Исходный код открыт — загляни внутрь, предложи улучшение или собери свою версию.</p><a class="about-link" href="https://github.com/arnur-git/ArchLauncher" target="_blank" rel="noreferrer"><span data-i18n="githubCta">Смотреть проект на GitHub</span><b>↗</b></a></div><div class="about-stats"><div><b>5</b><span data-i18n="statLoaders">ЗАГРУЗЧИКОВ</span></div><div><b>2</b><span data-i18n="statModSources">КАТАЛОГА МОДОВ</span></div><div><b>0₸</b><span data-i18n="statPrice">БЕСПЛАТНО</span></div></div></div><div class="fine-print"><span data-i18n="legalNote">ArchLauncher не содержит Minecraft. Для входа Microsoft нужна лицензия Minecraft: Java Edition. Офлайн-профиль предназначен для одиночной игры.</span><span>MADE BY ARNUR &amp; CODEX</span></div></div></section>
+  </main>
+
+  <footer class="footer wrap"><a class="brand" href="#top"><img src="../src/assets/arch-mark.svg" alt="" width="30" height="30"><span>ARCH<span class="brand-light">LAUNCHER</span></span></a><span>© 2026 ARNUR &amp; CODEX</span><div><a href="https://github.com/arnur-git/ArchLauncher/releases/latest" target="_blank" rel="noreferrer" data-i18n="footerReleases">Релизы</a><a href="https://github.com/arnur-git/ArchLauncher" target="_blank" rel="noreferrer">GitHub</a></div></footer>
+  <script src="script.js"></script>
+</body>
+</html>
