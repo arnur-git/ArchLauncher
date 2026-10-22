@@ -7,6 +7,7 @@ const { createServer } = require('http');
 const { randomBytes, randomUUID, createHash } = require('crypto');
 const { URL } = require('url');
 const { Client } = require('minecraft-launcher-core');
+const AUTHLIB_INJECTOR_VERSION = '1.2.8';
 
 let win;
 const root = path.join(app.getPath('appData'), 'ArchLauncher');
@@ -160,7 +161,7 @@ ipcMain.handle('login-ely', async (_, credentials) => {
 });
 
 async function requestJson(url, options = {}) {
-  const headers = { 'User-Agent':'ArchLauncher/1.0.4 (Minecraft launcher)', ...(options.headers || {}) };
+  const headers = { 'User-Agent':'ArchLauncher/1.1.2 (Minecraft launcher)', ...(options.headers || {}) };
   const response = await fetch(url, { redirect: 'follow', ...options, headers });
   if (!response.ok) throw new Error(`Сервер вернул HTTP ${response.status}`);
   return response.json();
@@ -358,6 +359,57 @@ async function prepareLoader(instance, gameDir, javaPath) {
   throw new Error('Неизвестный загрузчик сборки');
 }
 
+async function refreshElyAuthorization(account) {
+  const authorization = account.authorization;
+  const accessToken = authorization?.access_token || account.accessToken;
+  const clientToken = authorization?.client_token;
+  if (!accessToken || !clientToken) return authorization || {
+    access_token: accessToken || '0',
+    client_token: 'archlauncher',
+    uuid: String(account.uuid).replace(/-/g, ''),
+    name: account.username,
+    user_properties: '[]',
+    meta: { type: 'mojang' },
+  };
+
+  const response = await fetch('https://authserver.ely.by/auth/refresh', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify({ accessToken, clientToken, requestUser: true }),
+  });
+  let result;
+  try { result = await response.json(); } catch { throw new Error('Ely.by вернул некорректный ответ при обновлении сессии.'); }
+  if (!response.ok) {
+    const message = String(result?.errorMessage || result?.error || 'ошибка авторизации');
+    if (response.status === 401 || /expired|invalid token/i.test(message)) {
+      throw new Error('Сессия Ely.by истекла. Переподключи аккаунт Ely.by в настройках и запусти игру снова.');
+    }
+    throw new Error(`Не удалось обновить игровую сессию Ely.by: ${message}`);
+  }
+  if (!result?.accessToken || !result?.clientToken) throw new Error('Ely.by не вернул обновлённую игровую сессию. Переподключи аккаунт Ely.by.');
+
+  const profile = result.selectedProfile || {};
+  const previousUuid = account.uuid;
+  const uuid = String(profile.id || authorization.uuid || account.uuid).replace(/-/g, '');
+  const username = profile.name || authorization.name || account.username;
+  account.uuid = uuid;
+  account.username = username;
+  account.accessToken = result.accessToken;
+  account.authorization = {
+    ...authorization,
+    access_token: result.accessToken,
+    client_token: result.clientToken,
+    uuid,
+    name: username,
+    user_properties: JSON.stringify(result.user?.properties || []),
+    meta: { ...(authorization.meta || {}), type: 'mojang' },
+  };
+  const accounts = readAccounts().filter(item => item.uuid !== previousUuid && item.uuid !== uuid);
+  accounts.push(account);
+  writeAccounts(accounts);
+  return account.authorization;
+}
+
 ipcMain.handle('launch-game', async (_, payload) => {
   const instance = (readJson(instancesPath, [])).find(x => x.id === payload.instanceId);
   if (!instance) throw new Error('Сборка не найдена');
@@ -367,13 +419,29 @@ ipcMain.handle('launch-game', async (_, payload) => {
   const gameDir = path.join(root, 'instances', instance.id); fs.mkdirSync(gameDir, { recursive: true });
   const java = await javaForMinecraft(instance.version);
   const version = await prepareLoader(instance, gameDir, java.path);
-  const auth = account.authorization || { access_token: account.accessToken || '0', client_token: 'archlauncher', uuid: account.uuid.replace(/-/g, ''), name: account.username, user_properties: '{}', meta: { type: 'mojang' } };
+  const auth = account.type === 'ely'
+    ? await refreshElyAuthorization(account)
+    : account.authorization || { access_token: account.accessToken || '0', client_token: 'archlauncher', uuid: account.uuid.replace(/-/g, ''), name: account.username, user_properties: '{}', meta: { type: 'mojang' } };
   const maxRam = Math.min(4, Math.max(2, Number(settings.ram) || 3));
   const options = { root: gameDir, version, memory: { min: '1G', max: `${maxRam}G` }, authorization: auth, javaPath: java.path, forge: instance.loader === 'Forge' ? path.join(root, 'cache', `forge-${instance.loaderVersion}-installer.jar`) : undefined, customArgs: ['-XX:CICompilerCount=2', '-XX:TieredStopAtLevel=1'], overrides: { maxSockets: 16 } };
   if (account.type === 'ely') {
-    const injector = path.join(root, 'cache', 'authlib-injector.jar');
-    if (!fs.existsSync(injector)) await downloadTo('https://authlib-injector.yushi.moe/artifact/47/authlib-injector-47.jar', injector);
-    options.customArgs.push(`-javaagent:${injector}=https://authserver.ely.by`);
+    const injector = path.join(root, 'cache', `authlib-injector-${AUTHLIB_INJECTOR_VERSION}.jar`);
+    if (!fs.existsSync(injector)) {
+      send('game-status', { running: true, text: 'Подготавливаем авторизацию Ely.by…' });
+      await downloadTo(`https://github.com/yushijinhun/authlib-injector/releases/download/v${AUTHLIB_INJECTOR_VERSION}/authlib-injector-${AUTHLIB_INJECTOR_VERSION}.jar`, injector);
+    }
+    const signature = await fs.promises.open(injector, 'r');
+    let validJar = false;
+    try {
+      const header = Buffer.alloc(4);
+      const { bytesRead } = await signature.read(header, 0, 4, 0);
+      validJar = bytesRead >= 4 && header[0] === 0x50 && header[1] === 0x4b;
+    } finally { await signature.close(); }
+    if (!validJar) {
+      await fs.promises.rm(injector, { force: true });
+      throw new Error('Файл authlib-injector повреждён. Запусти игру ещё раз, чтобы скачать его заново.');
+    }
+    options.customArgs.unshift(`-javaagent:${injector}=ely.by`);
   }
   const launcher = new Client();
   launcher.on('debug', data => send('game-log', redactLog(data, account)));
